@@ -579,6 +579,7 @@ public:
 	virtual void enable_for_stealing_focus(OS::ProcessID pid);
 
 	virtual Error embed_process(WindowID p_window, OS::ProcessID p_pid, const Rect2i &p_rect, bool p_visible, bool p_grab_focus);
+	virtual Error request_close_embedded_process(OS::ProcessID p_pid);
 	virtual Error remove_embedded_process(OS::ProcessID p_pid);
 	virtual OS::ProcessID get_focused_process_id();
 
@@ -653,8 +654,10 @@ public:
 	// Used to cache the result of `can_create_rendering_device()` when RenderingDevice isn't currently being used.
 	// This is done as creating a RenderingDevice is quite slow.
 	static inline RenderingDeviceCreationStatus created_rendering_device = RenderingDeviceCreationStatus::UNKNOWN;
-
 	static bool can_create_rendering_device();
+
+	static inline RenderingDeviceCreationStatus supported_rendering_device = RenderingDeviceCreationStatus::UNKNOWN;
+	static bool is_rendering_device_supported();
 
 	DisplayServer();
 	~DisplayServer();
